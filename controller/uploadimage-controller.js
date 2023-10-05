@@ -1,5 +1,9 @@
 import FileModel from "../models/file-schema.js";
 
+import dotenv from "dotenv";
+
+dotenv.config();
+
 export const uploadImage = async (req, res) => {
   const fileObj = {
     path: req.file.path,
@@ -7,7 +11,7 @@ export const uploadImage = async (req, res) => {
   };
   try {
     const result = await FileModel.create(fileObj);
-    res.status(200).json({ path: `/file/${result._id}` });
+    res.status(200).json({ path: `${process.env.URL}/file/${result._id}` });
   } catch (error) {
   
 console.error(error.message);
